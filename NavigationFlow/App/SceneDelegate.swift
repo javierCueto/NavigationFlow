@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let loginSession = LoginSessionImp()
+    let navigationController = UINavigationController()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -19,9 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
   
         window = UIWindow(windowScene: windowScene)
-        let loginController = LoginViewController()
-        loginController.title = "Login"
-        let navigationController = UINavigationController(rootViewController: loginController)
+        if loginSession.isLogged {
+            let controller = MainTabBarViewController()
+            navigationController.pushViewController(controller, animated: false)
+        } else {
+            let loginController = LoginViewController(loginSession: loginSession)
+            loginController.title = "Login"
+            navigationController.pushViewController(loginController, animated: false)
+        }
+
        // navigationController.navigationBar.prefersLargeTitles = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

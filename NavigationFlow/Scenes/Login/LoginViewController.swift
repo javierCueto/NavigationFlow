@@ -59,7 +59,29 @@ class LoginViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return textField
     }()
-
+    
+    lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.setTitle("Login", for: .normal)
+        button.backgroundColor = .systemGreen
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
+        return button
+    }()
+    
+    let loginSession: LoginSession
+    
+    init(loginSession: LoginSession) {
+        self.loginSession = loginSession
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -80,7 +102,16 @@ class LoginViewController: UIViewController {
         
         mainStackView.addArrangedSubview(emailTextField)
         mainStackView.addArrangedSubview(passwordTextField)
+        mainStackView.addArrangedSubview(loginButton)
         
+    }
+    
+    @objc func loginButtonAction() {
+        print("fsdf")
+        let controller = MainTabBarViewController()
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.viewControllers = [controller]
+        loginSession.login()
     }
 
 }

@@ -13,7 +13,7 @@ protocol SettingsTableViewControllerDelegate: AnyObject {
 
 final class SettingsTableViewController: UITableViewController {
     
-    let viewData = [SettingsItem(title: "Login", isSelected: false, navigateTo: .login), SettingsItem(title: "Profile", isSelected: true, navigateTo: .profile)]
+    let viewData = [SettingsItem(title: "Logout", isSelected: false, navigateTo: .login), SettingsItem(title: "Profile", isSelected: true, navigateTo: .profile)]
     
     weak var delegate: SettingsTableViewControllerDelegate?
     
@@ -47,12 +47,11 @@ final class SettingsTableViewController: UITableViewController {
         let data = viewData[indexPath.row]
         var configuration = UIListContentConfiguration.cell()
         configuration.text = data.title
-        cell.contentConfiguration = configuration
         if !data.isSelected {
             cell.selectionStyle = .none
+            configuration.textProperties.color = .systemBlue
         }
-
-        cell.backgroundColor = .systemGray5
+        cell.contentConfiguration = configuration
         return cell
     }
 
@@ -63,7 +62,10 @@ final class SettingsTableViewController: UITableViewController {
         case .login:
             delegate?.didSelectLogout()
         case .profile:
-            print("profile")
+            let controller = UIViewController()
+            controller.view.backgroundColor = .systemBackground
+            controller.title = "Profile"
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 

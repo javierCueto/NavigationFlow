@@ -14,7 +14,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     func configUI() {
-        let controllerOne = UIViewController()
+        let controllerOne = HomeCollectionViewController()
         let controllerOneNav = UINavigationController(rootViewController: controllerOne)
         controllerOne.view.backgroundColor = .white
         controllerOne.title = "Home"
@@ -30,7 +30,6 @@ final class MainTabBarViewController: UITabBarController {
         let controllerThree = SettingsTableViewController()
         controllerThree.delegate = self
         let controllerThreeNav = UINavigationController(rootViewController: controllerThree)
-        controllerThree.view.backgroundColor = .white
         controllerThree.title = "Settings"
         controllerThreeNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "gear.circle"), selectedImage: UIImage(systemName: "gear.circle.fill"))
         

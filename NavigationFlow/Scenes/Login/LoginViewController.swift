@@ -90,7 +90,7 @@ class LoginViewController: UIViewController {
 
     func configUI() {
         view.backgroundColor = .systemBackground
-        
+        navigationController?.isNavigationBarHidden = false
         view.addSubview(profileImageView)
         profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
